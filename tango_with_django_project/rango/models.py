@@ -1,10 +1,15 @@
 from django.db import models
+from django.contrib import admin
 
 # Create your models here.
 
 
 class Category(models.Model):
     name = models.CharField(max_length=128, unique=True)
+    views = models.IntegerField(default=0)
+    likes = models.IntegerField(default=0)
+
+
     class Meta:
         verbose_name_plural = 'Categories'
     def __str__(self):
@@ -19,3 +24,11 @@ class Page(models.Model):
     
     def __str__(self):
         return self.title
+
+class PageAdmin(admin.ModelAdmin):
+    list_display = ('title', 'category', 'url')
+
+
+#    Finally, register the PageAdmin class with Django’s admin interface.
+#You should modify the line admin.site.register(Page). Change it to
+#admin.site.register(Page, PageAdmin) in Rango’s admin.py file
