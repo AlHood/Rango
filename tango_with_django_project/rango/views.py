@@ -94,7 +94,7 @@ def add_page(request, category_name_slug):
     form = PageForm()
 
     if request.method == 'POST':
-    form = PageForm(request.POST)
+        form = PageForm(request.POST)
     
         if form.is_valid():
             if category:
