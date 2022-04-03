@@ -11,7 +11,7 @@ from rango.forms import PageForm
 
 
 def index(request):
-    # Query the database for a list of ALL categories currently stored.
+    # Query the database for a list of ALL categories currently stored
     # Order the categories by the number of likes in descending order.
     # Retrieve the top 5 only -- or all if less than 5.
     # Place the list in our context_dict dictionary (with our boldmessage!)
