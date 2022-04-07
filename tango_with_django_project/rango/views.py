@@ -15,6 +15,9 @@ from django.contrib.auth import authenticate, login, logout
 
 
 def index(request):
+    #test cookie
+    request.session.set_test_cookie()
+
     # Query the database for a list of ALL categories currently stored
     # Order the categories by the number of likes in descending order.
     # Retrieve the top 5 only -- or all if less than 5.
@@ -34,6 +37,10 @@ def index(request):
 
 
 def about(request):
+    #looking for test cookie
+    if request.session.test_cookie_worked():
+        print("TEST COOKIE WORKED!")
+        request.session.delete_test_cookie()
 
     context_dict = {'boldmessage': 'This tutorial has been put together by Alastair'}
 
