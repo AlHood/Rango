@@ -63,15 +63,21 @@ def show_category(request, category_name_slug):
         # the template will display the "no category" message for us.
         context_dict['category'] = None
         context_dict['pages'] = None
-    # Go render the response and return it to the client.
     return render(request, 'rango/category.html', context=context_dict)
 
+  
 
+@login_required
 def add_category(request):
-    if not request.user.is_authenticated:
-        return render(request, 'rango/restricted.html')
+#    if not request.user.is_authenticated:
+#        return render(request, 'rango/restricted.html')
     # A HTTP POST?
+    #if not request.user.is_authenticated:
+        #return redirect(reverse('rango:restricted'))
+
     if request.method == 'POST':
+        #if not request.user.is_authenticated:
+            #return redirect(reverse('rango:restricted'))
         form = CategoryForm(request.POST)
          # Have we been provided with a valid form?
         if form.is_valid():
@@ -88,6 +94,7 @@ def add_category(request):
             # Render the form with error messages (if any).
     return render(request, 'rango/add_category.html', {'form': form})
 
+@login_required
 def add_page(request, category_name_slug):
     if not request.user.is_authenticated:
         return render(request, 'rango/restricted.html')
