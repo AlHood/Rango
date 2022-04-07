@@ -68,8 +68,8 @@ def show_category(request, category_name_slug):
 
 
 def add_category(request):
-    if not request.user.is_authenticated():
-        return redirect('/restricted/')
+    if not request.user.is_authenticated:
+        return render(request, 'rango/restricted.html')
     # A HTTP POST?
     if request.method == 'POST':
         form = CategoryForm(request.POST)
@@ -89,8 +89,8 @@ def add_category(request):
     return render(request, 'rango/add_category.html', {'form': form})
 
 def add_page(request, category_name_slug):
-    if not request.user.is_authenticated():
-        return redirect('/restricted/')
+    if not request.user.is_authenticated:
+        return render(request, 'rango/restricted.html')
     try:
         category = Category.objects.get(slug=category_name_slug)
     except Category.DoesNotExist:
@@ -215,7 +215,7 @@ def user_login(request):
         # blank dictionary object...
         return render(request, 'rango/login.html')
 
-#@login_required
+@login_required
 def restricted(request):
     #return HttpResponse("Since you're logged in, you can see this text!")
     return render(request, 'rango/restricted.html')
